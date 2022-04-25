@@ -1,17 +1,15 @@
 # Distributed systems lab
 
+Testing is possible with `./gradlew bootRun`
+
 ## Lab tasks:
 
-- Build your own data model. Start with a simple Java class (e.g. Shopping Item, Todolist Item, Person Info)
+- Add Spring Data JPA to your application, use H2 as database driver/implementation in the first place
 
-- Build a REST API using a verbs and nouns to
+- Extend the data object with @Entity annotation AND define an id
 
-- Create item entries
+- Build a repository interface based on Crud/JPARepository
 
-- List item entries
+- Autowire the repository to your application / Controller class
 
-- Delete item entries
-
-- Update item entries
-
-- Use JSON as exchange mechanism
+- Invoke "database actions"
