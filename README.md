@@ -1,6 +1,6 @@
 # Distributed systems lab
 
-Testing is possible with `./gradlew bootRun`
+Testing is possible with `./gradlew bootRun` inside the demo folder
 
 To run the docker container first you need to execute `./gradlew build` to build the Java jar.
 Then to build the docker image run:
