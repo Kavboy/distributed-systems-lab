@@ -1,5 +1,9 @@
 # Distributed systems lab
 
+Testing is possible with `./gradlew bootRun` inside the demo folder
+
+The API definition is then available under: [http://localhost:8090/swagger-ui/index.html#/](http://localhost:8090/swagger-ui/index.html#/)
+
 ## Lab tasks:
 
 - Build your own data model. Start with a simple Java class (e.g. Shopping Item, Todolist Item, Person Info)
