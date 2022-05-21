@@ -1,5 +1,9 @@
 # Distributed systems lab
 
+Testing is possible with `./gradlew bootRun` inside the demo folder
+
+The API definition is then available under: [http://localhost:8090/swagger-ui/index.html#/](http://localhost:8090/swagger-ui/index.html#/)
+
 ## Lab tasks:
 
 - Build your own Spring Boot application starting at the Spring Initializr (start.spring.io)
