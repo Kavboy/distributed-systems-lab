@@ -1,6 +1,8 @@
 # Distributed systems lab
 
-Testing is possible with `./gradlew bootRun`
+Testing is possible with `./gradlew bootRun` inside the demo folder
+
+The API definition is then available under: [http://localhost:8090/swagger-ui/index.html#/](http://localhost:8090/swagger-ui/index.html#/)
 
 ## Lab tasks:
 
