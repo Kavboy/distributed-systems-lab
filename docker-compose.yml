@@ -1,0 +1,54 @@
+version: "3.9"
+services:
+  mariadb-ds-laravel-backend:
+    image: mariadb:latest
+    container_name: mariadb-DS-laravel-backend
+    restart: always
+    environment:
+      - MARIADB_DATABASE=${DB_DATABASE}
+      - MARIADB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    healthcheck:
+      test: '/usr/bin/mysql --user=${DB_USERNAME} --password=${DB_PASSWORD} --execute "SHOW DATABASES;"'
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    ports:
+      - "3306:3306"
+    networks:
+      - distributedSystems
+  php-ds-laravel-backend:
+    container_name: php-DS-laravel-backend
+    build:
+      context: docker/php
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    depends_on:
+      mariadb-ds-laravel-backend:
+        condition: service_healthy
+    links:
+      - mariadb-ds-laravel-backend
+    networks:
+      - distributedSystems
+
+  nginx-ds-laravel-backend:
+    container_name: nginx-DS-laravel-backend
+    build:
+      context: docker/nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www
+    links:
+      - php-ds-laravel-backend
+    networks:
+      - distributedSystems
+
+networks:
+  distributedSystems:
+    driver: bridge

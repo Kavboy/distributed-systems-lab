@@ -1,0 +1,208 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Todo List Application backend",
+        "description": "A todo list application backend with Laravel",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/todos": {
+            "get": {
+                "tags": [
+                    "todos"
+                ],
+                "summary": "Get all todos",
+                "description": "Returns all todos",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/TodoItem"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Todo not found"
+                    },
+                    "500": {
+                        "description": "Something unexpected happened, please try again later"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "todos"
+                ],
+                "summary": "Update the specified todo in storage.",
+                "operationId": "updateTodoItem",
+                "requestBody": {
+                    "request": "TodoItemArray",
+                    "description": "List of todo objects",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TodoItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TodoItem"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Something unexpected happened, please try again later"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "todos"
+                ],
+                "summary": "Store a newly created todo in storage.",
+                "operationId": "store",
+                "requestBody": {
+                    "request": "TodoItemArray",
+                    "description": "List of todo objects",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TodoItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TodoItem"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Something unexpected happened, please try again later"
+                    }
+                }
+            }
+        },
+        "/todos/{name}": {
+            "get": {
+                "tags": [
+                    "todos"
+                ],
+                "summary": "Get todo by name",
+                "description": "Returns a single todo",
+                "operationId": "getTodoByName",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Todo name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TodoItem"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Todo not found"
+                    },
+                    "500": {
+                        "description": "Something unexpected happened, please try again later"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "todos"
+                ],
+                "summary": "Deletes a pet",
+                "description": "Remove the specified todo from storage.",
+                "operationId": "deletePet",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Todo name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted"
+                    },
+                    "404": {
+                        "description": "Todo not found"
+                    },
+                    "500": {
+                        "description": "Something unexpected happened, please try again later"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "TodoItem": {
+                "title": "TodoItem model",
+                "description": "TodoItem model",
+                "required": [
+                    "todo",
+                    "priority"
+                ],
+                "properties": {
+                    "todo": {
+                        "title": "todo",
+                        "description": "todo",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    "priority": {
+                        "title": "priority",
+                        "description": "priority",
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "TodoItem"
+                }
+            }
+        }
+    }
+}

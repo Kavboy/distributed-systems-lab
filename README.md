@@ -1,22 +1,40 @@
 # Distributed systems lab
 
-Testing is possible with `./gradlew bootRun` inside the demo folder
+This is a backend for the Todo List application based on the Laravel framework.
+For more information on Laravel see [https://laravel.com/docs/8.x/releases][https://laravel.com/docs/8.x/releases]
 
-To run the docker container first you need to execute `./gradlew build` to build the Java jar.
-Then to build the docker image run:
-`docker build --build-arg JAR_FILE=build/libs/demo-0.0.1-SNAPSHOT.jar -t kavboy/demo-spring-docker .`
+## The docker environment
 
-To run the container execute `docker run --name demo-spring-docker -p 8090:8090 kavboy/demo-spring-docker`
-If you want to run it in background add `-d`
+Requirements:
 
-The API definition is available under: [http://localhost:8090/swagger-ui/index.html#/](http://localhost:8090/swagger-ui/index.html#/)
+-   Docker with docker-compose.
 
-To stop the container run `docker stop demo-spring-docker`
+Copy the .env.example to a .env file and make the needed changes you want.
 
-To remove the container execute `docker rm demo-spring-docker`
+Make sure, that the files:
 
-To remove the image execute `docker rmi kavboy/demo-spring-docker`
+-   docker/php/entrypoint.sh
+-   install.sh
+    Have the Line Sequence as LN instead of CRLF
+
+Then execute
+
+```
+docker-compose up -d
+```
+
+in the root directory. After successfully execution the API documentation is available at [http://localhost:8080/api/documentation](http://localhost:8080/api/documentation).
+
+### Fresh install
+
+Since docker does not wait for container setup, there needed to be a separate routine to setup the laravel environment.
+So to completely reinstall the docker environment, you need to delete the following file:
+
+-   .installed
+
+You need to also remove the docker container and images.
+To remove the container execute `docker-compose down`
 
 ## Lab tasks:
 
-- Add Spring Boot app to docker container
+-   Todo List application backend
